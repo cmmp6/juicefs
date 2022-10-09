@@ -1108,9 +1108,8 @@ public class JuiceFileSystemImpl extends FileSystem {
       int fd = lib.jfs_create(Thread.currentThread().getId(), handle, normalizePath(f), permission.toShort());
       if (fd == ENOENT) {
         Path parent = f.getParent();
-        FsPermission perm = FsPermission.getDirDefault().applyUMask(FsPermission.getUMask(getConf()));
         try {
-          mkdirs(parent, perm);
+          mkdirs(parent, FsPermission.getDirDefault());
         } catch (FileAlreadyExistsException e) {
         }
         continue;
