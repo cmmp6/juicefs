@@ -91,9 +91,10 @@ func newCacheStore(m *cacheManager, dir string, cacheSize int64, pendingPages in
 		logger.Warnf("not enough space (%d%%) or inodes (%d%%) for caching in %s: free ratio should be >= %d%%", int(br*100), int(fr*100), c.dir, int(c.freeRatio*100))
 	}
 	logger.Infof("Disk cache (%s): capacity (%d MB), free ratio (%d%%), max pending pages (%d)", c.dir, c.capacity>>20, int(c.freeRatio*100), pendingPages)
-	go c.flush()
-	go c.checkFreeSpace()
-	go c.refreshCacheKeys()
+	logger.Infof("Skip cache key refresh.")
+        go c.flush()
+        go c.checkFreeSpace()
+	//go c.refreshCacheKeys()
 	go c.scanStaging()
 	return c
 }
