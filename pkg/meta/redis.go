@@ -213,6 +213,9 @@ func newRedisMeta(driver, addr string, conf *Config) (Meta, error) {
 			} else {
 				rdb = c
 			}
+			fmt.Printf("redis connection pool size is %d, opt size is %d, timeout is %f", c.PoolStats().TotalConns, opt.PoolSize, opt.ConnMaxIdleTime.Minutes())
+			logger.Infof("redis connection pool size is %d, opt size is %d, timeout is %f", c.PoolStats().TotalConns, opt.PoolSize, opt.ConnMaxIdleTime.Minutes())
+
 		}
 		if rdb == nil {
 			var copt redis.ClusterOptions

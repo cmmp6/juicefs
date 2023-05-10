@@ -406,6 +406,7 @@ public class JuiceFileSystemImpl extends FileSystem {
     obj.put("metaPoolIdleTimeout", Integer.valueOf(getConf(conf, "meta-pool-idle-timeout", "0")));
 
     String jsonConf = obj.toString(2);
+    LOG.info(String.format("use juicefs conf %s", jsonConf));
     handle = lib.jfs_init(name, jsonConf, user, group, superuser, supergroup);
     if (handle <= 0) {
       throw new IOException("JuiceFS initialized failed for jfs://" + name);
